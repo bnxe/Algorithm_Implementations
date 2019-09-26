@@ -1,0 +1,39 @@
+int num;
+vector <int> adj[100010];
+vector <int> sorted;
+int indegree[100010];
+
+bool TP_Sort(){
+    sorted.clear();
+    set <int> process;
+    memset(indegree , 0 , 100010 * sizeof(int));
+    for (int a = 0; a < num; ++a){
+        for (int b = 0; b < adj[a].size(); ++b){
+            ++indegree[adj[a][b].first];
+        }
+    }
+    for (int a = 0; a < num; ++a){
+        if (indegree[a] == 0){
+            process.insert(a);
+        }
+    }
+    while (! process.empty()){
+        int cur = *process.begin();
+        process.erase(process.begin());
+        sorted.push_back(cur);
+        for (int a = 0; a < adj[cur].size(); ++a){
+            --indegree[adj[cur][a].first];
+            if (indegree[adj[cur][a].first] == 0){
+                process.insert(adj[cur][a].first);
+            }
+        }
+    }
+    if (sorted.size() < num){
+        return false;
+    }
+    return true;
+}
+
+int main(){
+  return 0;
+}
