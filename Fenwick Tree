@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+
+int tree[100010];
+
+void update(int index , int val){
+ ++index;
+ while (index <= num){
+ tree[index] += val;
+ index += index & (-index);
+ }
+}
+
+int sum(int index){
+ int ret = 0;
+ ++index;
+ while (index > 0){
+ ret += tree[index];
+ index -= index & (-index);
+ }
+ return ret;
+}
+
+int main(){
+  return 0;
+}
